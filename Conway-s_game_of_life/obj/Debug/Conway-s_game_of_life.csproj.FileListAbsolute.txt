@@ -1,0 +1,9 @@
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\bin\Debug\Conway-s_game_of_life.exe.config
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\bin\Debug\Conway-s_game_of_life.exe
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\bin\Debug\Conway-s_game_of_life.pdb
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\obj\Debug\Conway-s_game_of_life.csprojAssemblyReference.cache
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\obj\Debug\Conway_s_game_of_life.Form1.resources
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\obj\Debug\Conway_s_game_of_life.Properties.Resources.resources
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\obj\Debug\Conway-s_game_of_life.csproj.GenerateResource.cache
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\obj\Debug\Conway-s_game_of_life.exe
+T:\Projects\VisualStudio\Conway-s_game_of_life\Conway-s_game_of_life\obj\Debug\Conway-s_game_of_life.pdb

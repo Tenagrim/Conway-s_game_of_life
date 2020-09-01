@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Conway_s_game_of_life
 {
+    [Serializable]
     class World
     {
         public int Width { get; set; }
@@ -14,7 +15,7 @@ namespace Conway_s_game_of_life
         public bool[,] Field { get { return field; } }
         public bool[,] init_state { get; }
         public bool Bordered { get; set; }
-        public int Generetion { get { return generation; } }
+        public int Generation { get { return generation; } }
 
         private int generation;
         private bool[,] field;
@@ -162,7 +163,31 @@ namespace Conway_s_game_of_life
         public void Step()
         {
             this.generation++;
+            bool[,] tmp = field;
             field = GetNextGeneration();
+            //GC.Collect();
+        }
+
+        private bool InWorld(Coords pos)
+        {
+            if (pos.X < 0 || pos.X >= Width || pos.Y < 0 || pos.Y >= Height)
+                return false;
+            else
+                return true;
+        }
+
+        public void Alive(Coords pos)
+        {
+            if (!InWorld(pos))
+                return;
+            field[pos.Y, pos.X] = true;
+        }
+
+        public void Kill(Coords pos)
+        {
+            if (!InWorld(pos))
+                return;
+            field[pos.Y, pos.X] = false;
         }
     }
 }

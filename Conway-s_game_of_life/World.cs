@@ -34,6 +34,20 @@ namespace Conway_s_game_of_life
             Bordered = bordered;
             this.generation = 0;
         }
+
+        public World(bool[,] new_field, bool bordered)
+        {
+            field = new_field;
+            Width = new_field.GetLength(1);
+            Height = new_field.GetLength(0);
+            Bordered = bordered;
+            this.generation = 0;
+        }
+
+        public void SetField(bool[,] new_field)
+        {
+            field = new_field;
+        }
         public void FillRandom(int density)
         {
             Random rand = new Random();
@@ -175,6 +189,27 @@ namespace Conway_s_game_of_life
             else
                 return true;
         }
+        private bool InWorld(int x, int y)
+        {
+            if (x < 0 || x >= Width || y < 0 || y >= Height)
+                return false;
+            else
+                return true;
+        }
+        private bool InWorld(Coords pos, int w, int h)
+        {
+            if (pos.X < 0 || pos.X >= Width || pos.Y < 0 || pos.Y >= Height || pos.X + w >= Width || pos.Y + h >= Height)
+                return false;
+            else
+                return true;
+        }
+        private bool InWorld(Coords pos, Brush brush)
+        {
+            if (pos.X - brush.Width / 2 < 0 || pos.Y - brush.Height / 2 < 0 || pos.X + brush.Width / 2 >= Width || pos.Y + brush.Height / 2 >= Height)
+                return false;
+            else
+                return true;
+        }
 
         public void Alive(Coords pos)
         {
@@ -188,6 +223,58 @@ namespace Conway_s_game_of_life
             if (!InWorld(pos))
                 return;
             field[pos.Y, pos.X] = false;
+        }
+
+        public void Kill(Coords pos, int w, int h)
+        {
+            if (!InWorld(pos, w, h))
+                return ;
+            Debug.WriteLine($"Kill {pos.X} {pos.Y}  {w}  {h}");
+            for (int i = pos.Y; i < pos.Y+h; i++)
+            {
+                for (int j = pos.X; j <pos.X+w; j++)
+                {
+                    field[i, j] = false;
+                }
+            }
+        }
+
+        public bool[,] GetArea(Coords pos, int w, int h)
+        {
+            bool[,] res;
+            if (!InWorld(pos, w, h))
+            {
+              res = new bool[1, 1];
+                res[0,0] = true;
+                return res;
+            }
+            res = new bool[h, w];
+
+            for (int i = 0; i <  h; i++)
+            {
+                for (int j = 0; j <  w; j++)
+                {
+                    res[i , j ] = field[i+pos.Y, j+ pos.X];
+                }
+            }
+            return res;
+        }
+
+        public void BrushStamp(Brush brush, Coords pos)
+        {
+            int k, l;
+           // if (!InWorld(pos, brush))
+               // return;
+            for (int i = 0; i < brush.Height; i++)
+            {
+                for (int j = 0; j < brush.Width; j++)
+                {
+                    k =pos.X+ j - brush.Width / 2;
+                    l = pos.Y + i - brush.Height / 2;
+                    if(InWorld(k,l))
+                        field[l,k] = brush.Field[i , j] || field[l,k];
+                }
+            }
         }
     }
 }
